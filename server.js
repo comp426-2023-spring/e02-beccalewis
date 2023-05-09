@@ -1,3 +1,6 @@
+
+import {rps, rpsls} from './lib/rpsls.js';
+
 //// Load most basic dependencies
 // Create require function 
 // https://nodejs.org/docs/latest-v18.x/api/module.html#modulecreaterequirefilename
@@ -60,7 +63,7 @@ if (args.debug) {
 // Create an app server
 const app = express()
 // Set a port for the server to listen on
-const port = args.port || args.p || process.env.PORT || 8080
+const port = args.port || args.p || process.env.PORT || 5050
 // Load app middleware here to serve routes, accept data requests, etc.
 //
 // Create and update access log
@@ -70,7 +73,58 @@ app.use(morgan(':remote-addr - :remote-user [:date[iso]] ":method :url HTTP/:htt
 ))
 // Serve static files
 const staticpath = args.stat || args.s || process.env.STATICPATH || path.join(__dirname, 'public')
-app.use('/', express.static(staticpath))
+app.use('/', express.static(staticpath));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
+
+// Check endpoint @ /app
+app.get('/app', (req, res) => {
+    res.status(200).send("200 OK");
+})
+
+// check endpoint at /app/rps
+app.get('/app/rps/', (req, res) => {
+    res.status(200).send(JSON.stringify(rps()));
+})
+
+// /app/rpsls endpoint
+app.get('/app/rpsls/', (req, res) => {
+    res.status(200).send(JSON.stringify(rpsls()));
+})
+
+// /app/rps/play endpoint (bodies & params)
+app.get('/app/rps/play/', (req, res) => { //rps URLEncoded
+    res.status(200).send(JSON.stringify(rps(req.query.shot)));
+})
+
+app.post('/app/rps/play/', (req, res) => { //rps JSON
+    res.status(200).send(JSON.stringify(rps(req.body.shot)));
+})
+
+app.get('/app/rps/play/:shot', (req, res) => { //rps shot params
+    res.status(200).send(JSON.stringify(rps(req.params.shot)));
+})
+
+// /app/rpsls/play endpoint
+app.get('/app/rpsls/play/', (req, res) => { //rpsls URLEncoded
+    res.status(200).send(JSON.stringify(rpsls(req.query.shot)));
+})
+
+app.post('/app/rpsls/play/', (req, res) => { //rpsls JSON
+    res.status(200).send(JSON.stringify(rpsls(req.body.shot)));
+})
+
+app.get('/app/rpsls/play/:shot', (req, res) => { //rpsls shot params
+    res.status(200).send(JSON.stringify(rpsls(req.params.shot)));
+})
+
+
+// default endpoint)
+app.get("/app/*", (req, res) => {
+    res.status(404).send("404 NOT FOUND");
+})
+
 // Create app listener
 const server = app.listen(port)
 // Create a log entry on start
@@ -102,3 +156,5 @@ process.on('SIGINT', () => {
         }    
     })
 })
+
+

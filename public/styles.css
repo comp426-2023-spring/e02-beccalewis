@@ -1,8 +1,43 @@
 body {
+    text-align: center;
+    font-family: "Lucida Console", "Courier New", monospace;
 }
 
-h1 {
+.hstack {
+    align-items: center;
+    display: inline-block;
+    font-family: "Lucida Console", "Courier New", monospace;
 }
 
-p {
+.hstack_item {
+    padding: 4px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.vstack {
+    display: inline-flex;
+    flex-direction: column;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.option-title {
+    margin-bottom: 5px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.button {
+    margin-top: 5px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.outcome {
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 20px;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.emphasize {
+    font-size: 30px;
+    font-family: "Lucida Console", "Courier New", monospace;
 }

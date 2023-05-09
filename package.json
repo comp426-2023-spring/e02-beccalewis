@@ -1,13 +1,13 @@
 {
   "name": "html-cs-js-demo",
   "version": "1.0.0",
-  "description": "This is the base code for an html+css+js demo non-assignment (extra credit).",
+  "description": "Final Exam for Comp426 Spring 2023.",
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "nodemon -e js,css,html server.js --port=5000 --debug",
+    "test": "nodemon -e js,css,html server.js --port=5050 --debug",
     "start": "node server.js",
-    "demo": "nodemon -e js,css,html server.js --port=5000 --stat=demo"
+    "demo": "nodemon -e js,css,html server.js --port=5050 --stat=demo"
   },
   "keywords": [
     "node",
@@ -20,11 +20,14 @@
     "express",
     "server"
   ],
-  "author": "@jdmar3",
+  "author": "@jimmy-lynch",
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "express": "^4.18.2",
     "minimist": "^1.2.8",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }
